@@ -68,12 +68,13 @@
     
     function getHand() {
         global $deck, $names, $players;
-        $score = 0;
+        
         
         for($i = 0; $i < count($players); $i++){
             echo  "<h2>" . $names[$players[$i]] . "<h2/>", "<img src='img/pokemon/" . $names[$players[$i]] . ".png'>";
             //echo "<h1>" . count($players) ."</h1>"; //Testing
         //}
+            $score = 0;
             do{
                 $crd = ($deck[(count($deck) - 1)] % 13) + 1;
                 $cardSuit =  floor($crd / 13);
