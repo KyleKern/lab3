@@ -6,51 +6,117 @@
     <body>
         
         <?php
+        
+        
+        
+        
+        
+        
+        
+        function mapNumberToCard($num)
+        {
+            $cardValue = ($num % 13) + 1;
+            $cardSuit =  floor($num / 13);
+            $suitStr = "";
             
-            $person = array(
-                "name" =>"Abraham", 
-                "imgUrl" => "./profile.pics/abraham.png"
-                "cards" => array(
-                    array(
-                        "suit" => "hearts",
-                        "value" => "4"
-                        ),
-                    array(
-                        "suits" => "clubs",
-                        "value" => "10"
-                        )
-                    )
+            switch($cardSuit)
+            {
+                case 0:
+                    $suitStr = "clubs";
+                    break;
+                case 1:
+                    $suitStr = "diamonds";
+                    break;
+                case 2:
+                    $suitStr = "hearts";
+                    break;
+                case 3:
+                    $suitStr = "spades";
+                    break;
+            }
+            
+            $card = array(
+                'num' => $cardValue,
+                'suit' => $cardSuit,
+                'imgURL' => "./cards/".$suitStr."/".$cardValue.".png"
                 );
                 
-        function displayPerson($person)
-        {
-            echo "<img src='".$person["profilePicUrl"]."'>";    
-                
-            for($i=0;$i<$person["cards"].length;$i++)
-            {
-                $cards = $person["cards"][$i];
-                
-                // 
-                $imgURL = "./cards/".$card["suit"]."/".$card["value"].".png";
-                
-                //
-                echo "<img src='".$imgURL."'>";
-            }
-            echo calculateHandValue($person["cards"]);
+            return $card;
         }
         
-        function calculateHandValue($cards)
+        function generateDeck()
         {
-            $sum = 0;
+            $cards = array();
             
-            foreach($cards as $cards)
+            for($i = 0; $i < 52; $i++)
             {
-                $sum += $cards["value"];
+                array_push($cards,$i);
             }
-            return $sum;
+            shuffle($cards);
+            
+            return $cards;
         }
         
-        displ
+        function printDeck($deck)
+        {
+            for($i = 0; $i < count($deck); $i++)
+            {
+                $cardNum = $deck[$i];
+                $card = mapNumberToCard($cardNum);
+                echo "imgURL: ".$card["imgURL"]."<br>";
+            }
+        }
+        
+        function generateHand($deck)
+        {
+            $hand = array();
+            
+            for($i = 0; $i < 3; $i++)
+            {
+                $cardNum = array_pop($deck);
+                $card = mapNumberToCard($cardNum);
+                array_push($hand, $card);
+            }
+            return $hand;
+        }
+        $deck = generateDeck();
+        //printDeck($deck);
+        
+        
+    
+        $person = array(
+            "name" => "Abraham", 
+            "profilePicUrl" => "./profile_pics/abraham.png",
+            "cards" => generateHand($deck)
+            );
+        
+            function displayPerson($person)
+            {
+                echo "<img src='".$person["profilePicUrl"]."'>";    
+                
+                for($i = 0; $i < count($person["cards"]); $i++)
+                {
+                    $card = $person["cards"][$i];
+                
+                    echo "<img src='".$card["imgURL"]."'>";
+                }
+                
+                echo calculateHandValue($person["cards"]);
+            }
+        
+            function calculateHandValue($cards)
+            {
+                $sum = 0;
+            
+                foreach($cards as $card)
+                {
+                    $sum += $card["num"];
+                }
+                return $sum;
+            }
+            displayPerson($person);
+            
+            
         ?>
     </body>
 </html>
