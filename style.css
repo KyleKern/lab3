@@ -1,5 +1,6 @@
   h2{
          text-align:left;
+         background-color:#A63D40;
          }
     
       footer{
@@ -12,7 +13,7 @@
          }
        
          body{
-             background-color:#324376;
+             background-color:#90A959;
              text-align: center;
              
          }
@@ -25,8 +26,8 @@
           footer {
                 text-align: center; 
                 color:red;
-                background-color:#F5DD90;
+                background-color:#6494AA;
             }
         h1{
-            color:red;
+            color:#151515;
         }
