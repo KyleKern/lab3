@@ -68,15 +68,15 @@
     
     function getHand() {
         global $deck, $names, $players, $score;
-        
-        for($i = 0; $i < count($players); $i++){
+        $player_cards = array();
+        for ($i = 0; $i < count($players); $i++) {
             echo  "<h2>" . $names[$players[$i]] . "<h2/>", "<img src='img/pokemon/" . $names[$players[$i]] . ".png'>";
             
             $score[$i] = 0;
             
             do {
                 $crd = ($deck[(count($deck) - 1)] % 13) + 1;
-                $cardSuit =  floor($crd / 13);
+                $cardSuit = rand(0, 3);
                 $suitStr = "";
             
                 switch($cardSuit) {
@@ -93,6 +93,17 @@
                         $suitStr = "spades";
                         break;
                 }
+                
+                $temp = $crd.$suitStr;
+                
+                while (in_array($temp, $player_cards)) {
+                    shuffle($deck);
+                    $crd = ($deck[(count($deck) - 1)] % 13) + 1;
+                    
+                    $temp = $crd.$suitStr;
+                }
+                
+                array_push($player_cards, $temp);
                 
                 echo "<img src = 'img/$suitStr/$crd.png' /> ";
             
