@@ -74,6 +74,8 @@
             
             $score[$i] = 0;
             
+            $player_cards = array();
+            
             do {
                 $crd = ($deck[(count($deck) - 1)] % 13) + 1;
                 $cardSuit =  floor($crd / 13);
@@ -94,6 +96,17 @@
                         break;
                 }
                 
+                $temp = $crd.$suitStr;
+                
+                while (in_array($temp, $player_cards)) {
+                    shuffle($deck);
+                    $crd = ($deck[(count($deck) - 1)] % 13) + 1;
+                    
+                    $temp = $crd.$suitStr;
+                }
+                
+                array_push($player_cards, $temp);
+                
                 echo "<img src = 'img/$suitStr/$crd.png' /> ";
             
                 if ($crd >= 1 && $crd <= 13) {
@@ -109,6 +122,8 @@
                 array_pop($deck);
             
             } while ($score[$i] < 39);
+            
+            unset($player_cards);
             
             echo $score[$i] . " ";
         }
