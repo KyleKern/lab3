@@ -1,0 +1,32 @@
+  h2{
+         text-align:left;
+         }
+    
+      footer{
+             text-align:center;
+         }
+         
+         img{
+              float: none;
+            
+         }
+       
+         body{
+             background-color:#324376;
+             text-align: center;
+             
+         }
+         
+       
+         
+         hr{
+            text-align:right; 
+         }
+          footer {
+                text-align: center; 
+                color:red;
+                background-color:#F5DD90;
+            }
+        h1{
+            color:red;
+        }
