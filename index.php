@@ -153,7 +153,7 @@
 <html>
 <head>
      <style>
-    @import url(style.css);
+    @import url(styles.css);
       
       </style>
        <h1 style="blue; background:#586BA4 "> Silver Jack </h1>
